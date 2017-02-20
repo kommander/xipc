@@ -1,7 +1,7 @@
 const path = require('path');
 const fibonacci = require('./fibonacci');
 const ximpc = require('../lib');
-const wrappedFibonacci = ximpc.wrapFn(path.resolve(__dirname, './fibonacci'));
+const wrappedFibonacci = ximpc.require(path.resolve(__dirname, './fibonacci'));
 
 const factor = 1000000000;
 let startTime = Date.now();
