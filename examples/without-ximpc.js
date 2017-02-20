@@ -3,7 +3,7 @@ const fibonacci = require('./fibonacci');
 const ximpc = require('../lib');
 const wrappedFibonacci = ximpc.require(path.resolve(__dirname, './fibonacci'));
 
-const factor = 1000000000;
+const factor = 10000000;
 let startTime = Date.now();
 
 Promise.all([
