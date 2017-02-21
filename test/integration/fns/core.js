@@ -68,7 +68,7 @@ describe('Core XIMPC Function', () => {
     mod(1, 1).then(() => {
       done('should not get here');
     }).catch((err) => {
-      err.should.have.property('message', 'XIMPC: cannot find module');
+      err.should.have.property('message', 'XIMPC: cannot find module [invalid_id]');
       done();
     });
   });
@@ -89,6 +89,17 @@ describe('Core XIMPC Function', () => {
       result.should.eql(2);
       done();
     }).catch(done);
+  });
+
+  it('an object fn can rely on object this', (done) => {
+    const mod = ximpc.require('../../data/complex-object');
+
+    mod.that().then((result) => {
+      should(result).eql('the string');
+      done();
+    }).catch((err) => {
+      done(err);
+    });
   });
 
   it('works with sync functions as well');
