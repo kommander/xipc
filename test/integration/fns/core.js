@@ -42,6 +42,21 @@ describe('Core XIMPC Function', () => {
       done();
     }).catch((err) => done(err));
   });
+
+  it('provides a pre fn:send hook', (done) => {
+    const mod = ximpc.require('../../data/pid');
+
+    mod.pre('fn:send', (msg) => {
+      return msg;
+    });
+
+    Promise.all([mod(), mod(), mod(), mod()]).then((results) => {
+      results.reduce((prev, cur) => !prev.includes(cur) ? prev.concat([cur]) : prev, [])
+        .length.should.eql(4);
+      done();
+    }).catch((err) => done(err));
+  });
+
   it('starts as many workers as specified in the default settings');
   it('allows to override workers setting via env variable NODE_XIMPC_WORKERS');
   it('times out the workers after default idle time');
