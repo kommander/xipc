@@ -25,7 +25,7 @@ describe('Core XIMPC Function', () => {
   it('returns the correct error from worker', (done) => {
     const mod = ximpc.require('../../data/error');
 
-    mod().then((result) => {
+    mod().then(() => {
       done('we should not get here');
     }).catch((err) => {
       err.message.should.eql('XIMPC: process_error');
@@ -65,7 +65,7 @@ describe('Core XIMPC Function', () => {
       return msg;
     });
 
-    mod(1, 1).then((result) => {
+    mod(1, 1).then(() => {
       done('should not get here');
     }).catch((err) => {
       err.should.have.property('message', 'XIMPC: cannot find module');
@@ -73,6 +73,16 @@ describe('Core XIMPC Function', () => {
     });
   });
 
+  it('turns an object module in to workers', (done) => {
+    const mod = ximpc.require('../../data/object');
+
+    mod.fn(1, 1).then((result) => {
+      result.should.eql(2);
+      done();
+    }).catch(done);
+  });
+
+  it('works with sync functions as well');
   it('starts as many workers as specified in the default settings');
   it('allows to override workers setting via env variable NODE_XIMPC_WORKERS');
   it('times out the workers after default idle time');
