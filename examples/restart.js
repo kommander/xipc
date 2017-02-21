@@ -28,4 +28,32 @@ Promise.all(promises)
     console.log('Num Results:', results.length);
     const duration = Date.now() - startTime;
     console.log('Duration XIMPC:', duration, 'ms');
+  })
+  .then(() => new Promise((resolve) => setTimeout(resolve, 4000)))
+  .then(() => {
+    const newPromises = [];
+    for (let i = 0; i < 100; i++) {
+      newPromises.push(wrappedFibonacci(factor));
+    }
+    startTime = Date.now();
+    return Promise.all(newPromises);
+  })
+  .then((results) => {
+    console.log('Num Results:', results.length);
+    const duration = Date.now() - startTime;
+    console.log('Duration XIMPC:', duration, 'ms');
+  })
+  .then(() => new Promise((resolve) => setTimeout(resolve, 4000)))
+  .then(() => {
+    const newPromises = [];
+    for (let i = 0; i < 100; i++) {
+      newPromises.push(wrappedFibonacci(factor));
+    }
+    startTime = Date.now();
+    return Promise.all(newPromises);
+  })
+  .then((results) => {
+    console.log('Num Results:', results.length);
+    const duration = Date.now() - startTime;
+    console.log('Duration XIMPC:', duration, 'ms');
   });
