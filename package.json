@@ -1,0 +1,15 @@
+{
+  "name": "ximpc",
+  "version": "0.1.0",
+  "description": "Wrap modules into workers",
+  "main": "lib/index.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npm run test"
+  },
+  "author": "Sebastian Herrlinger",
+  "license": "Apache-2.0"
+}
