@@ -8,8 +8,14 @@
     "test": "test"
   },
   "scripts": {
-    "test": "npm run test"
+    "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha --bail --timeout 15000 './test/integration/**/*.js'"
   },
   "author": "Sebastian Herrlinger",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "should": "^11.2.0",
+    "should-sinon": "0.0.5",
+    "sinon": "^1.17.7"
+  }
 }
