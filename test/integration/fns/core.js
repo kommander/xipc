@@ -82,6 +82,15 @@ describe('Core XIMPC Function', () => {
     }).catch(done);
   });
 
+  it('an object fn can rely on object privates', (done) => {
+    const mod = ximpc.require('../../data/complex-object');
+
+    mod.pAdd(1).then((result) => {
+      result.should.eql(2);
+      done();
+    }).catch(done);
+  });
+
   it('works with sync functions as well');
   it('starts as many workers as specified in the default settings');
   it('allows to override workers setting via env variable NODE_XIMPC_WORKERS');
