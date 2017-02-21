@@ -28,7 +28,7 @@ describe('Core XIMPC Function', () => {
     mod().then((result) => {
       done('we should not get here');
     }).catch((err) => {
-      err.message.should.eql('process_error');
+      err.message.should.eql('XIMPC: process_error');
       done();
     });
   });
@@ -55,6 +55,22 @@ describe('Core XIMPC Function', () => {
         .length.should.eql(4);
       done();
     }).catch((err) => done(err));
+  });
+
+  it('handles missing module id on worker', (done) => {
+    const mod = ximpc.require('../../data/addition');
+
+    mod.pre('fn:send', (msg) => {
+      msg.moduleId = 'invalid_id';
+      return msg;
+    });
+
+    mod(1, 1).then((result) => {
+      done('should not get here');
+    }).catch((err) => {
+      err.should.have.property('message', 'XIMPC: cannot find module');
+      done();
+    });
   });
 
   it('starts as many workers as specified in the default settings');
