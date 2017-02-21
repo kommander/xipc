@@ -5,7 +5,7 @@ const factor = 10000000;
 let startTime = Date.now();
 const promises = [];
 
-for (let i = 0; i < 10000; i++) {
+for (let i = 0; i < 1000; i++) {
   promises.push(wrappedFibonacci(factor));
 }
 
