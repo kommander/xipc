@@ -102,18 +102,21 @@ describe('Core XIMPC Function', () => {
     });
   });
 
-  it('works with sync functions as well');
+  it('works with sync functions as well', (done) => {
+    const mod = ximpc.require('../../data/sync');
+
+    Promise.all([mod(), mod(), mod(), mod()]).then((results) => {
+      results.reduce((prev, cur) => !prev.includes(cur) ? prev.concat([cur]) : prev, [])
+        .length.should.eql(4);
+      done();
+    }).catch((err) => done(err));
+  });
+
+  it('can connect to arbitrary function in network');
+  it('handles returned object instances (prefer fn programming)');
   it('starts as many workers as specified in the default settings');
-  it('allows to override workers setting via env variable NODE_XIMPC_WORKERS');
-  it('times out the workers after default idle time');
-  it('allows to override the default idle time via NODE_XIMPC_IDLE_TIMEOUT');
-  it('restarts workers when needed again');
   it('does not load the same module twice');
   it('does not load itself twice after require cache flush');
   it('works in cluster setup');
   it('returns real values from worker (AMF maybe, not JSON, custom IPC channel)');
-  it('can lookup similar services and use them as a backup (describe methods, object, functions etc.)');
-  it('can run remote workers');
-  it('can find remote workers');
-  it('uses a native method to get the caller file for require like behaviour');
 });

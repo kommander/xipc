@@ -1,6 +1,6 @@
 'use strict';
-const wrap = require('./lib');
-const fn = wrap('./fn');
+const ximpc = require('./lib');
+const fn = ximpc.require('./fn');
 fn(1).then((result) => {
   console.log('result:', result);
 });
